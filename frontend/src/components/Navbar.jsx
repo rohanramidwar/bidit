@@ -5,14 +5,14 @@ import { Link } from "react-router-dom";
 
 const Navbar = () => {
   return (
-    <div className="fixed top-0 h-14 px-4 w-full flex items-center border-b border-gray-100 justify-between">
+    <div className="bg-white sticky z-50 top-0 inset-x-0 h-14 flex items-center border-b border-gray-200 justify-between">
       <Link to={"/"}>
         <div className="flex gap-2 items-center">
           <img src={logo} alt="Logo" className="h-5" />
           <p>Bidit</p>
         </div>
       </Link>
-      <div className="flex gap-4 items-center">
+      <div className="flex space-x-2 items-center">
         <Button variant={"ghost"}>
           <Link to={"/login"}>Sign in</Link>
         </Button>
