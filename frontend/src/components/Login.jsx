@@ -5,7 +5,7 @@ import { Label } from "./ui/label";
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { login } from "@/actions/authActions";
 
 const loginSchema = z.object({
@@ -16,6 +16,7 @@ const loginSchema = z.object({
 const Login = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const isLoading = useSelector((state) => state.authReducer.isLoading);
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -99,8 +100,13 @@ const Login = () => {
             )}
           </div>
           <div className="w-full pt-2">
-            <Button type="submit" variant="blue" className="w-full">
-              Sign in
+            <Button
+              type="submit"
+              variant="blue"
+              className="w-full"
+              disabled={isLoading}
+            >
+              {isLoading ? "Signing in..." : "Sign in"}
             </Button>
           </div>
           <p className="text-slate-500 text-sm text-center">
