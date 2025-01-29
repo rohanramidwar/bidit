@@ -17,11 +17,9 @@ const App = () => {
       <Toaster position="top-right" reverseOrder={false} />
       <Navbar />
       <Routes>
-        {/* Public routes */}
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
 
-        {/* Protected buyer route */}
         <Route
           path="/"
           element={
@@ -31,7 +29,6 @@ const App = () => {
           }
         />
 
-        {/* Protected seller route */}
         <Route
           path="/dashboard"
           element={
@@ -41,7 +38,6 @@ const App = () => {
           }
         />
 
-        {/* Redirect based on role if logged in */}
         <Route
           path="*"
           element={

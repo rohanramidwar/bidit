@@ -21,3 +21,5 @@ const auth = async (req, res, next) => {
     res.status(401).json({ error: "Please authenticate" });
   }
 };
+
+export default auth;

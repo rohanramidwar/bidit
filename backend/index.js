@@ -5,6 +5,7 @@ import { config } from "dotenv";
 import { connectDatabase } from "./config/database.js";
 import colors from "colors";
 import authRoutes from "./routes/auth.js";
+import sellerRoutes from "./routes/seller.js";
 
 const app = express();
 //enable us to send post req
@@ -20,6 +21,7 @@ app.use(
 app.use(express.json());
 
 app.use("/user", authRoutes);
+app.use("/api", sellerRoutes);
 
 config(); //access to env
 
