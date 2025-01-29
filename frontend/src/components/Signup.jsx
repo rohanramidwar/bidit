@@ -1,24 +1,24 @@
 import React, { useState } from "react";
 import { z } from "zod";
-import logo from "../assets/logo.png";
 import { ArrowRight } from "lucide-react";
 import { Label } from "./ui/label";
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { signup } from "@/actions/authActions";
 
 const signupSchema = z.object({
   name: z.string().min(2, "Name must be at least 2 characters"),
   email: z.string().email("Invalid email address"),
-  password: z
-    .string()
-    .min(8, "Password must be at least 8 characters")
-    .regex(/[A-Z]/, "Password must contain at least one uppercase letter")
-    .regex(/[0-9]/, "Password must contain at least one number"),
+  password: z.string().min(4, "Password must be at least 4 characters"),
+  // .regex(/[A-Z]/, "Password must contain at least one uppercase letter")
+  // .regex(/[0-9]/, "Password must contain at least one number"),
 });
 
 const Signup = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [role, setRole] = useState("buyer");
   const [formData, setFormData] = useState({
     name: "",
@@ -46,8 +46,12 @@ const Signup = () => {
     e.preventDefault();
     try {
       signupSchema.parse(formData);
-
-      console.log("Form data:", formData, "Role:", role);
+      const signupData = {
+        ...formData,
+        role,
+      };
+      dispatch(signup(signupData, navigate));
+      console.log({ formData, role });
     } catch (error) {
       if (error instanceof z.ZodError) {
         const newErrors = {};
@@ -65,7 +69,7 @@ const Signup = () => {
 
   return (
     <div className="py-14 flex items-center justify-center">
-      <div className="w-1/4">
+      <div className="lg:w-1/4">
         <form
           onSubmit={handleSubmit}
           className="flex flex-col space-y-2 items-center w-full"
@@ -73,7 +77,7 @@ const Signup = () => {
           <h1 className="text-3xl font-medium">Create an account</h1>
           <div
             role="button"
-            className="flex items-center text-sm cursor-pointer hover:text-blue-600"
+            className="flex items-center text-sm cursor-pointer"
             onClick={() => navigate("/login")}
           >
             <p>Already have an account? Sign in</p>

@@ -5,6 +5,8 @@ import { Label } from "./ui/label";
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { login } from "@/actions/authActions";
 
 const loginSchema = z.object({
   email: z.string().email("Invalid email address"),
@@ -13,6 +15,7 @@ const loginSchema = z.object({
 
 const Login = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -38,7 +41,7 @@ const Login = () => {
     e.preventDefault();
     try {
       loginSchema.parse(formData);
-
+      dispatch(login(formData, navigate));
       console.log("Form data:", formData);
     } catch (error) {
       if (error instanceof z.ZodError) {
@@ -53,7 +56,7 @@ const Login = () => {
 
   return (
     <div className="py-14 flex items-center justify-center">
-      <div className="w-1/4">
+      <div className="lg:w-1/4">
         <form
           onSubmit={handleSubmit}
           className="flex flex-col space-y-2 items-center w-full"
@@ -61,7 +64,7 @@ const Login = () => {
           <h1 className="text-3xl font-medium">Sign in to your account</h1>
           <div
             role="button"
-            className="flex items-center text-sm cursor-pointer hover:text-blue-600"
+            className="flex items-center text-sm cursor-pointer"
             onClick={() => navigate("/signup")}
           >
             <p>Don't have an account? Sign up</p>

@@ -4,7 +4,7 @@ import jwt from "jsonwebtoken";
 
 export const register = async (req, res) => {
   try {
-    const { email, password, role, firstName, lastName } = req.body;
+    const { email, password, role, name } = req.body;
 
     const existingUser = await User.findOne({ email });
     if (existingUser) {
@@ -16,8 +16,7 @@ export const register = async (req, res) => {
       email,
       password: hashedPassword,
       role,
-      firstName,
-      lastName,
+      name,
     });
 
     await user.save();
@@ -28,7 +27,7 @@ export const register = async (req, res) => {
 
     res.status(201).json({
       token,
-      user: { id: user._id, email, role, firstName, lastName },
+      user: { id: user._id, email, role, name },
     });
   } catch (error) {
     res.status(500).json({ error: "Server error" });
@@ -59,8 +58,7 @@ export const login = async (req, res) => {
         id: user._id,
         email,
         role: user.role,
-        firstName: user.firstName,
-        lastName: user.lastName,
+        name: user.name,
       },
     });
   } catch (error) {

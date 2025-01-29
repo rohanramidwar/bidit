@@ -1,5 +1,5 @@
 import React from "react";
-import logo from "../assets/logo.png";
+import logo from "../assets/bear.png";
 import { Button } from "./ui/button";
 import { Link } from "react-router-dom";
 
@@ -8,7 +8,7 @@ const Navbar = () => {
     <div className="bg-white sticky z-50 top-0 inset-x-0 h-14 flex items-center border-b border-gray-200 justify-between">
       <Link to={"/"}>
         <div className="flex gap-2 items-center">
-          <img src={logo} alt="Logo" className="h-5" />
+          <img src={logo} alt="Logo" className="h-6" />
           <p>Bidit</p>
         </div>
       </Link>
