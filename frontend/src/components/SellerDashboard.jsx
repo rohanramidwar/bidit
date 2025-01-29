@@ -1,10 +1,10 @@
 import React from "react";
-import CreateAuctionItem from "./CreateAuctionItem";
+import CreateAuction from "./CreateAuction";
 
 const SellerDashboard = () => {
   return (
     <div>
-      <CreateAuctionItem />
+      <CreateAuction />
     </div>
   );
 };

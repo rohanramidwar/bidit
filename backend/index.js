@@ -6,6 +6,7 @@ import { connectDatabase } from "./config/database.js";
 import colors from "colors";
 import authRoutes from "./routes/auth.js";
 import sellerRoutes from "./routes/seller.js";
+import buyerRoutes from "./routes/buyer.js";
 
 const app = express();
 //enable us to send post req
@@ -21,7 +22,7 @@ app.use(
 app.use(express.json());
 
 app.use("/user", authRoutes);
-app.use("/api", sellerRoutes);
+app.use("/api", sellerRoutes, buyerRoutes);
 
 config(); //access to env
 

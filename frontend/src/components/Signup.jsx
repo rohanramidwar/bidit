@@ -52,7 +52,6 @@ const Signup = () => {
         role,
       };
       dispatch(signup(signupData, navigate));
-      console.log({ formData, role });
     } catch (error) {
       if (error instanceof z.ZodError) {
         const newErrors = {};

@@ -1,6 +1,6 @@
 import Item from "../models/Item.js";
 
-export const createAuctionItem = async (req, res) => {
+export const createAuction = async (req, res) => {
   const { title, itemPic, startingBid, endDate, admin } = req.body;
 
   const newItem = new Item({

@@ -1,22 +1,17 @@
 import jwt from "jsonwebtoken";
-import User from "../models/User.js";
 
 const auth = async (req, res, next) => {
   try {
-    const token = req.header("Authorization")?.replace("Bearer ", "");
-    if (!token) {
-      throw new Error();
-    }
+    const token = req.headers.authorization.split(" ")[1];
 
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    const user = await User.findById(decoded.userId);
+    let decodedData; //data that we want to get from token
 
-    if (!user) {
-      throw new Error();
-    }
+    decodedData = jwt.verify(token, "test"); //gives username and id
+    //now we know which user has logged in
+    req.userId = decodedData?.id; //users id
+    // console.log(decodedData);
 
-    req.user = user;
-    next();
+    next(); //to pass the actions to second thing
   } catch (error) {
     res.status(401).json({ error: "Please authenticate" });
   }

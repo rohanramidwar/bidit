@@ -43,7 +43,6 @@ const Login = () => {
     try {
       loginSchema.parse(formData);
       dispatch(login(formData, navigate));
-      console.log("Form data:", formData);
     } catch (error) {
       if (error instanceof z.ZodError) {
         const newErrors = {};

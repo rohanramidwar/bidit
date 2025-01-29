@@ -8,3 +8,5 @@ const API = axios.create({
 
 export const signup = (formData) => API.post("/user/register", formData);
 export const login = (formData) => API.post("/user/login", formData);
+export const createAuction = (formData) =>
+  API.post("/api/create-auction", formData);

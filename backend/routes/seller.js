@@ -1,9 +1,8 @@
 import express from "express";
-import { createAuctionItem } from "../controllers/Seller.js";
-import auth from "../middleware/auth.js";
+import { createAuction } from "../controllers/Seller.js";
 
 const router = express.Router();
 
-router.post("/create", auth, createAuctionItem);
+router.post("/create-auction", createAuction);
 
 export default router;

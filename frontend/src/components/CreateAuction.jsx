@@ -14,7 +14,9 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import { Upload } from "lucide-react";
+import { Plus, Upload } from "lucide-react";
+import { useDispatch, useSelector } from "react-redux";
+import { createAuction } from "@/actions/sellerActions";
 
 const auctionSchema = z.object({
   title: z.string().min(3, "Title must be at least 3 characters"),
@@ -22,7 +24,10 @@ const auctionSchema = z.object({
   itemPic: z.string().url("Valid image URL is required"),
 });
 
-const CreateAuctionItem = () => {
+const CreateAuction = () => {
+  const dispatch = useDispatch();
+  const { user } = useSelector((state) => state.authReducer);
+  const { isLoading } = useSelector((state) => state.auctionReducer);
   const [isOpen, setIsOpen] = useState(false);
   const [formData, setFormData] = useState({
     title: "",
@@ -82,6 +87,11 @@ const CreateAuctionItem = () => {
     e.preventDefault();
     try {
       auctionSchema.parse(formData);
+      const data = {
+        ...formData,
+        admin: user?.id,
+      };
+      dispatch(createAuction(data));
       setIsOpen(false);
       setFormData({
         title: "",
@@ -103,13 +113,16 @@ const CreateAuctionItem = () => {
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>
-        <Button variant="blue">Create an auction</Button>
+        <Button variant="blue">Create auction</Button>
       </DialogTrigger>
-      <DialogContent className="sm:max-w-[425px]">
-        <form onSubmit={handleSubmit}>
-          <h1 className="text-3xl font-medium text-center">
-            Create an auction
-          </h1>
+      <DialogContent>
+        <form onSubmit={handleSubmit} className="text-slate-800">
+          <DialogHeader>
+            <DialogTitle className="text-4xl font-medium text-center">
+              Create an auction
+            </DialogTitle>
+            <DialogDescription></DialogDescription>
+          </DialogHeader>
           <div className="grid gap-4 py-4">
             <div className="grid gap-2">
               <Label htmlFor="title">Title</Label>
@@ -205,8 +218,8 @@ const CreateAuctionItem = () => {
           </div>
 
           <DialogFooter>
-            <Button type="submit" variant="blue">
-              Create auction
+            <Button type="submit" variant="blue" disabled={isLoading}>
+              <Plus className="mt-px" /> {isLoading ? "Creating..." : "Create"}
             </Button>
           </DialogFooter>
         </form>
@@ -215,4 +228,4 @@ const CreateAuctionItem = () => {
   );
 };
 
-export default CreateAuctionItem;
+export default CreateAuction;
