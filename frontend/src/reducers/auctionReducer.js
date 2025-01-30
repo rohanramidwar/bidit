@@ -2,6 +2,8 @@ import {
   START_LOADING,
   END_LOADING,
   CREATE_AUCTION,
+  GET_MY_AUCTIONS,
+  UPDATE_AUCTION,
 } from "../constants/actionTypes";
 
 const initialState = {
@@ -30,7 +32,23 @@ const auctionReducer = (state = initialState, action) => {
     case CREATE_AUCTION:
       return {
         ...state,
-        auctions: [...state.auctions, action.payload],
+        auctions: [...state.auctions, payload],
+        error: null,
+      };
+
+    case GET_MY_AUCTIONS:
+      return {
+        ...state,
+        auctions: payload,
+        error: null,
+      };
+
+    case UPDATE_AUCTION:
+      return {
+        ...state,
+        auctions: state.auctions.map((auction) =>
+          auction._id === payload._id ? payload : auction
+        ),
         error: null,
       };
 
