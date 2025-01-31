@@ -56,12 +56,14 @@ const Login = () => {
 
   return (
     <div className="py-14 flex items-center justify-center">
-      <div className="lg:w-1/4">
+      <div className="lg:w-1/4 px-4 sm:px-0">
         <form
           onSubmit={handleSubmit}
-          className="flex flex-col space-y-2 items-center w-full"
+          className="text-slate-500 flex flex-col space-y-2 items-center w-full"
         >
-          <h1 className="text-3xl font-medium">Sign in to your account</h1>
+          <h1 className="text-3xl font-bold text-teal-700">
+            Sign in to your account
+          </h1>
           <div
             role="button"
             className="flex items-center text-sm cursor-pointer"
@@ -101,7 +103,7 @@ const Login = () => {
           <div className="w-full pt-2">
             <Button
               type="submit"
-              variant="blue"
+              variant="teal"
               className="w-full"
               disabled={isLoading}
             >

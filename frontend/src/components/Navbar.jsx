@@ -3,7 +3,7 @@ import logo from "../assets/logo.png";
 import { Button } from "./ui/button";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
-import CreatePopover from "./CreatePopover";
+import CreateAuction from "./CreateAuction";
 
 const Navbar = () => {
   const { user } = useSelector((state) => state.authReducer);
@@ -19,7 +19,7 @@ const Navbar = () => {
         </Link>
         {user && user?.role === "seller" && (
           <div>
-            <CreatePopover />
+            <CreateAuction />
           </div>
         )}
       </div>
@@ -27,11 +27,11 @@ const Navbar = () => {
         <div></div>
       ) : (
         <div className="flex space-x-2 items-center">
-          <Button variant={"ghost"}>
+          <Button size="sm" variant={"teal"}>
             <Link to={"/login"}>Sign in</Link>
           </Button>
-          <div className="w-px h-10 bg-gray-100"></div>
-          <Button variant={"ghost"}>
+
+          <Button className="text-white" size="sm" variant={"ghost"}>
             <Link to={"/signup"}>Create account</Link>
           </Button>
         </div>

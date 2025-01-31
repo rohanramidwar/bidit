@@ -69,12 +69,14 @@ const Signup = () => {
 
   return (
     <div className="py-14 flex items-center justify-center">
-      <div className="lg:w-1/4">
+      <div className="md:w-1/4 px-4 sm:px-0">
         <form
           onSubmit={handleSubmit}
-          className="flex flex-col space-y-2 items-center w-full"
+          className="text-slate-500 flex flex-col space-y-2 items-center w-full"
         >
-          <h1 className="text-3xl font-medium">Create an account</h1>
+          <h1 className="text-3xl font-bold text-teal-700">
+            Create an account
+          </h1>
           <div
             role="button"
             className="flex items-center text-sm cursor-pointer"
@@ -91,10 +93,10 @@ const Signup = () => {
               placeholder="Full name"
               value={formData.name}
               onChange={handleInputChange}
-              className={errors.name ? "border-red-500" : ""}
+              className={errors.name ? "border-red-700" : ""}
             />
             {errors.name && (
-              <p className="text-red-500 text-sm mt-1">{errors.name}</p>
+              <p className="text-red-700 text-sm mt-1">{errors.name}</p>
             )}
           </div>
           <div className="w-full">
@@ -105,10 +107,10 @@ const Signup = () => {
               placeholder="Email"
               value={formData.email}
               onChange={handleInputChange}
-              className={errors.email ? "border-red-500" : ""}
+              className={errors.email ? "border-red-700" : ""}
             />
             {errors.email && (
-              <p className="text-red-500 text-sm mt-1">{errors.email}</p>
+              <p className="text-red-700 text-sm mt-1">{errors.email}</p>
             )}
           </div>
           <div className="w-full">
@@ -128,17 +130,17 @@ const Signup = () => {
           <div className="w-full pt-2">
             <Button
               type="submit"
-              variant="blue"
+              variant="teal"
               className="w-full"
               disabled={isLoading}
             >
               {isLoading ? "Signing up..." : "Sign up"}
             </Button>
           </div>
-          <div className="w-full flex items-center justify-between space-x-2 text-slate-500">
-            <div className="h-px bg-gray-200 w-full"></div>
+          <div className="w-full flex items-center justify-between space-x-2">
+            <div className="h-px bg-gray-500 w-full"></div>
             <p>OR</p>
-            <div className="h-px bg-gray-200 w-full"></div>
+            <div className="h-px bg-gray-500 w-full"></div>
           </div>
           <div className="w-full">
             <Button
@@ -150,7 +152,7 @@ const Signup = () => {
               Continue as {role === "buyer" ? "seller" : "buyer"}
             </Button>
           </div>
-          <p className="text-slate-500 text-sm text-center">
+          <p className="text-sm text-center">
             By clicking continue, you agree to our{" "}
             <span className="underline cursor-pointer">Terms of Service</span>{" "}
             and <span className="underline cursor-pointer">Privacy Policy</span>

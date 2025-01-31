@@ -7,7 +7,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import { Plus, Upload } from "lucide-react";
+import { Upload } from "lucide-react";
 import { useState } from "react";
 import DatePicker from "react-datepicker";
 import { useDispatch, useSelector } from "react-redux";
@@ -19,7 +19,7 @@ const auctionSchema = z.object({
   itemPic: z.string().url("Valid image URL is required"),
 });
 
-const CreatePopover = () => {
+const CreateAuction = () => {
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.authReducer);
   const { isLoading } = useSelector((state) => state.auctionReducer);
@@ -222,4 +222,4 @@ const CreatePopover = () => {
   );
 };
 
-export default CreatePopover;
+export default CreateAuction;

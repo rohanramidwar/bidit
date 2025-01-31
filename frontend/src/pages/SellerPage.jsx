@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getMyAuctions } from "@/actions/sellerActions";
-import ManageAuctionCard from "@/components/ManageAuctionCard";
+import AuctionManageCard from "@/components/AuctionManageCard";
 
 const SellerPage = () => {
   const dispatch = useDispatch();
@@ -22,7 +22,7 @@ const SellerPage = () => {
       <div className="p-4">
         <div className="flex flex-col sm:grid grid-cols-4 gap-4 items-center">
           {auctions?.map((auction) => (
-            <ManageAuctionCard key={auction?._id} auction={auction} />
+            <AuctionManageCard key={auction?._id} auction={auction} />
           ))}
         </div>
       </div>

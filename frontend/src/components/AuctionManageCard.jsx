@@ -1,6 +1,6 @@
 import React from "react";
 
-const ManageAuctionCard = ({ auction }) => {
+const AuctionManageCard = ({ auction }) => {
   return (
     <div className="overflow-hidden w-full rounded-md bg-gray-100 shadow-md pb-2 space-y-2">
       <div className="relative h-40 bg-muted">
@@ -30,4 +30,4 @@ const ManageAuctionCard = ({ auction }) => {
   );
 };
 
-export default ManageAuctionCard;
+export default AuctionManageCard;
