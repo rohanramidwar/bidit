@@ -32,7 +32,7 @@ const auctionReducer = (state = initialState, action) => {
     case CREATE_AUCTION:
       return {
         ...state,
-        auctions: [...state.auctions, payload],
+        auctions: [payload, ...state.auctions],
         error: null,
       };
 

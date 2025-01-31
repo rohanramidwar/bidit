@@ -21,8 +21,6 @@ export const createAuction = async (req, res) => {
 export const getMyAuctions = async (req, res) => {
   const { userId } = req.params;
 
-  console.log("userId:", userId);
-
   try {
     // Find all auctions where the user is the admin
     const auctions = await Item.find({ admin: userId })

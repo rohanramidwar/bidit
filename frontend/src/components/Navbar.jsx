@@ -1,25 +1,30 @@
 import React from "react";
-import logo from "../assets/bear.png";
-import dummy from "../assets/dummy.png";
+import logo from "../assets/logo.png";
 import { Button } from "./ui/button";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
+import CreatePopover from "./CreatePopover";
 
 const Navbar = () => {
   const { user } = useSelector((state) => state.authReducer);
 
   return (
-    <div className="bg-white sticky z-50 top-0 inset-x-0 h-14 flex items-center border-b border-gray-200 justify-between">
-      <Link to={"/"}>
-        <div className="flex gap-2 items-center">
-          <img src={logo} alt="Logo" className="h-6" />
-          <p>Bidit</p>
-        </div>
-      </Link>
+    <div className="px-4 bg-gray-900 sticky z-50 top-0 inset-x-0 h-14 flex items-center border-b justify-between">
+      <div className="flex items-center gap-4">
+        <Link to={"/"}>
+          <div className="flex gap-2 items-center hover:opacity-75 transition">
+            <img src={logo} alt="logo" loading="lazy" width={30} height={30} />
+            <p className="text-lg text-teal-700 font-bold">Bidit</p>
+          </div>
+        </Link>
+        {user && user?.role === "seller" && (
+          <div>
+            <CreatePopover />
+          </div>
+        )}
+      </div>
       {user ? (
-        <div role="button">
-          <img src={dummy} alt="pic" className="w-9 h-9 rounded-full" />
-        </div>
+        <div></div>
       ) : (
         <div className="flex space-x-2 items-center">
           <Button variant={"ghost"}>

@@ -5,7 +5,7 @@ import Navbar from "./components/Navbar";
 import Login from "./components/Login";
 import Signup from "./components/Signup";
 import { Toaster } from "react-hot-toast";
-import SellerDashboard from "./components/SellerDashboard";
+import SellerPage from "./pages/SellerPage";
 import { ProtectedRoute } from "./components/ProtectedRoute";
 import { useSelector } from "react-redux";
 
@@ -13,7 +13,7 @@ const App = () => {
   const { user } = useSelector((state) => state.authReducer);
 
   return (
-    <div className="text-slate-800 flex flex-col min-h-screen">
+    <div className="font-inter text-slate-800 flex flex-col min-h-screen">
       <Toaster position="top-right" reverseOrder={false} />
       <Navbar />
       <Routes>
@@ -33,7 +33,7 @@ const App = () => {
           path="/dashboard"
           element={
             <ProtectedRoute allowedRoles={["seller"]}>
-              <SellerDashboard />
+              <SellerPage />
             </ProtectedRoute>
           }
         />
