@@ -1,7 +1,7 @@
 import React from "react";
 import ManageAuction from "./ManageAuction";
 
-const AuctionManageCard = ({ auction }) => {
+const AuctionManageCard = ({ auction, status }) => {
   const formatDate = (date) => {
     if (!date) return "";
     const d = new Date(date);
@@ -29,20 +29,24 @@ const AuctionManageCard = ({ auction }) => {
       <div className="flex items-center justify-between px-2.5 text-teal-900 font-medium">
         <div>{auction?.title}</div>
         <div>
-          <ManageAuction auctionId={auction?._id} />
+          <ManageAuction auctionId={auction?._id} status={status} />
         </div>
       </div>
       <div className="px-2.5 space-y-1">
-        <div className="flex items-center justify-between text-sm text-teal-900">
-          <div>Time left: </div>
-          <div>{formatDate(auction?.endDate)}</div>
-        </div>
+        {status ? (
+          <div className="flex items-center justify-between text-sm text-teal-900">
+            <div>Time left: </div>
+            <div>{formatDate(auction?.endDate)}</div>
+          </div>
+        ) : (
+          <div></div>
+        )}
         <div className="flex items-center justify-between text-sm text-teal-900">
           <div>Total bids: </div>
           <div>8 bids</div>
         </div>
         <div className="flex items-center justify-between text-sm text-teal-900">
-          <div>Current bid: </div>
+          <div>{status ? "Current bid:" : "Highest bid:"} </div>
           <div>$5</div>
         </div>
       </div>

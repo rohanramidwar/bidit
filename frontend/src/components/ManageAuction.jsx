@@ -5,7 +5,7 @@ import { Ellipsis, StopCircle, Trash2 } from "lucide-react";
 import { useDispatch } from "react-redux";
 import { deleteAuction, stopAuction } from "@/actions/sellerActions";
 
-const ManageAuction = ({ auctionId }) => {
+const ManageAuction = ({ auctionId, status }) => {
   const dispatch = useDispatch();
   const [isOpen, setIsOpen] = useState(false);
 
@@ -35,13 +35,17 @@ const ManageAuction = ({ auctionId }) => {
               </h4>
             </div>
             <div>
-              <Button
-                className="flex justify-start w-full rounded-none font-normal"
-                variant="ghost"
-                onClick={handleEndAuction}
-              >
-                <StopCircle /> End auction
-              </Button>
+              {status ? (
+                <Button
+                  className="flex justify-start w-full rounded-none font-normal"
+                  variant="ghost"
+                  onClick={handleEndAuction}
+                >
+                  <StopCircle /> End auction
+                </Button>
+              ) : (
+                <div></div>
+              )}
 
               <Button
                 className="flex justify-start w-full rounded-none font-normal"

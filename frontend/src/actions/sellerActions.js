@@ -7,7 +7,7 @@ import {
   GET_MY_ACTIVE_AUCTIONS,
   GET_MY_ENDED_AUCTIONS,
   START_LOADING,
-  UPDATE_AUCTION,
+  END_AUCTION,
 } from "@/constants/actionTypes";
 
 export const createAuction = (formData) => async (dispatch) => {
@@ -54,7 +54,7 @@ export const stopAuction = (auctionId) => async (dispatch) => {
   try {
     dispatch({ type: START_LOADING });
     const { data } = await api.stopAuction(auctionId);
-    dispatch({ type: UPDATE_AUCTION, payload: data }); //sends to reducer
+    dispatch({ type: END_AUCTION, payload: data }); //sends to reducer
     dispatch({ type: END_LOADING });
   } catch (err) {
     console.log(err);

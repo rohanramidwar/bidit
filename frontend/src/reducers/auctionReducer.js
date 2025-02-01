@@ -4,7 +4,7 @@ import {
   CREATE_AUCTION,
   GET_MY_ACTIVE_AUCTIONS,
   GET_MY_ENDED_AUCTIONS,
-  UPDATE_AUCTION,
+  END_AUCTION,
   DELETE_AUCTION,
 } from "../constants/actionTypes";
 
@@ -53,16 +53,15 @@ const auctionReducer = (state = initialState, action) => {
         error: null,
       };
 
-    case UPDATE_AUCTION:
-      // Check if the updated auction has an endDate
+    case END_AUCTION:
       if (payload.endDate) {
         return {
           ...state,
-          // Remove from active auctions
+
           activeAuctions: state.activeAuctions.filter(
             (auction) => auction._id !== payload._id
           ),
-          // Add to ended auctions if not already present
+
           endedAuctions: state.endedAuctions.some(
             (auction) => auction._id === payload._id
           )
