@@ -1,4 +1,6 @@
+import moment from "moment";
 import React from "react";
+import ManageAuction from "./ManageAuction";
 
 const AuctionManageCard = ({ auction }) => {
   return (
@@ -11,11 +13,16 @@ const AuctionManageCard = ({ auction }) => {
           className="h-full w-full object-cover"
         />
       </div>
-      <div className="px-2.5 text-teal-900 font-medium">{auction?.title}</div>
+      <div className="flex items-center justify-between px-2.5 text-teal-900 font-medium">
+        <div>{auction?.title}</div>
+        <div>
+          <ManageAuction />
+        </div>
+      </div>
       <div className="px-2.5 space-y-1">
         <div className="flex items-center justify-between text-sm text-teal-900">
           <div>Time left: </div>
-          <div>2 days</div>
+          <div>{moment(auction?.endDate).format("MM/DD/YYYY HH:mm:ss")}</div>
         </div>
         <div className="flex items-center justify-between text-sm text-teal-900">
           <div>Total bids: </div>

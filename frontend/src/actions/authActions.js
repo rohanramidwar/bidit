@@ -3,6 +3,7 @@ import * as api from "../api";
 import {
   END_LOADING,
   LOGIN,
+  LOGOUT,
   SIGN_UP,
   START_LOADING,
 } from "@/constants/actionTypes";
@@ -34,5 +35,16 @@ export const login = (formData, navigate) => async (dispatch) => {
     console.log(err);
     toast.error(err.response?.data?.error || "Invalid credentials");
     dispatch({ type: END_LOADING });
+  }
+};
+
+export const logOut = (navigate) => async (dispatch) => {
+  try {
+    dispatch({ type: LOGOUT }); //sends to reducer
+    toast.success("Successfully logged out!");
+    navigate("/login");
+  } catch (err) {
+    console.log(err);
+    toast.error(err.response?.data?.error || "Something went wrong");
   }
 };

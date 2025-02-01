@@ -2,7 +2,7 @@ import Item from "../models/Item.js";
 
 export const createAuction = async (req, res) => {
   const { title, itemPic, startingBid, endDate, admin } = req.body;
-
+  console.log("enddate", endDate);
   const newItem = new Item({
     title,
     itemPic,

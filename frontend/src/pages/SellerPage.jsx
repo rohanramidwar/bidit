@@ -15,12 +15,10 @@ const SellerPage = () => {
   }, [dispatch, user?.id]);
 
   return (
-    <div>
-      <div className="w-full h-14 bg-teal-700 flex items-center text-lg font-bold px-6 text-white">
-        Your auctions
-      </div>
-      <div className="p-4">
-        <div className="flex flex-col sm:grid grid-cols-4 gap-4 items-center">
+    <div className="pt-9 px-4 pb-20 w-full">
+      <div className="space-y-4">
+        <div className="text-lg font-semibold text-gray-700">Your auctions</div>
+        <div className="flex sm:grid grid-cols-4  gap-4 items-center">
           {auctions?.map((auction) => (
             <AuctionManageCard key={auction?._id} auction={auction} />
           ))}

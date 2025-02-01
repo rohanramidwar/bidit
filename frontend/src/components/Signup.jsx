@@ -93,10 +93,10 @@ const Signup = () => {
               placeholder="Full name"
               value={formData.name}
               onChange={handleInputChange}
-              className={errors.name ? "border-red-700" : ""}
+              className={errors.name ? "border-red-500" : ""}
             />
             {errors.name && (
-              <p className="text-red-700 text-sm mt-1">{errors.name}</p>
+              <p className="text-red-500 text-sm mt-1">{errors.name}</p>
             )}
           </div>
           <div className="w-full">
@@ -107,10 +107,10 @@ const Signup = () => {
               placeholder="Email"
               value={formData.email}
               onChange={handleInputChange}
-              className={errors.email ? "border-red-700" : ""}
+              className={errors.email ? "border-red-500" : ""}
             />
             {errors.email && (
-              <p className="text-red-700 text-sm mt-1">{errors.email}</p>
+              <p className="text-red-500 text-sm mt-1">{errors.email}</p>
             )}
           </div>
           <div className="w-full">
