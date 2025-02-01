@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getMyActiveAuctions, getMyAuctions } from "@/actions/sellerActions";
+import { getMyActiveAuctions } from "@/actions/sellerActions";
 import AuctionManageCard from "@/components/AuctionManageCard";
 
 const SellerPage = () => {

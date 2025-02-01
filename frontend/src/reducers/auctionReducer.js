@@ -54,16 +54,25 @@ const auctionReducer = (state = initialState, action) => {
       };
 
     case UPDATE_AUCTION:
-      return {
-        ...state,
-        activeAuctions: state.activeAuctions.map((auction) =>
-          auction._id === payload._id ? payload : auction
-        ),
-        endedAuctions: state.endedAuctions.map((auction) =>
-          auction._id === payload._id ? payload : auction
-        ),
-        error: null,
-      };
+      // Check if the updated auction has an endDate
+      if (payload.endDate) {
+        return {
+          ...state,
+          // Remove from active auctions
+          activeAuctions: state.activeAuctions.filter(
+            (auction) => auction._id !== payload._id
+          ),
+          // Add to ended auctions if not already present
+          endedAuctions: state.endedAuctions.some(
+            (auction) => auction._id === payload._id
+          )
+            ? state.endedAuctions.map((auction) =>
+                auction._id === payload._id ? payload : auction
+              )
+            : [payload, ...state.endedAuctions],
+          error: null,
+        };
+      }
 
     case DELETE_AUCTION:
       return {
