@@ -3,7 +3,7 @@ import Item from "../models/Item.js";
 export const createAuction = async (req, res) => {
   const { title, itemPic, startingBid, endDate, admin } = req.body;
 
-  const formattedEndDate = new Date(endDate);
+  const formattedEndDate = new Date(endDate).toISOString();
 
   const newItem = new Item({
     title,
@@ -31,7 +31,7 @@ export const stopAuction = async (req, res) => {
       return res.status(404).json({ message: "Auction not found" });
     }
 
-    auction.endDate = new Date();
+    auction.endDate = new Date().toISOString();
     const updatedAuction = await auction.save();
 
     res.status(200).json(updatedAuction);
@@ -48,7 +48,6 @@ export const deleteAuction = async (req, res) => {
     if (!auction) {
       return res.status(404).json({ message: "Auction not found" });
     }
-    // Delete the auction
     await Item.findByIdAndDelete(auctionId);
     res.status(200).json(auctionId);
   } catch (error) {
@@ -58,7 +57,7 @@ export const deleteAuction = async (req, res) => {
 
 export const getMyActiveAuctions = async (req, res) => {
   const { userId } = req.params;
-  const currentDate = new Date();
+  const currentDate = new Date().toISOString();
 
   try {
     const activeAuctions = await Item.find({
@@ -76,7 +75,7 @@ export const getMyActiveAuctions = async (req, res) => {
 
 export const getMyEndedAuctions = async (req, res) => {
   const { userId } = req.params;
-  const currentDate = new Date();
+  const currentDate = new Date().toISOString();
 
   try {
     const endedAuctions = await Item.find({
