@@ -2,14 +2,16 @@ import {
   START_LOADING,
   END_LOADING,
   CREATE_AUCTION,
-  GET_MY_AUCTIONS,
+  GET_MY_ACTIVE_AUCTIONS,
+  GET_MY_ENDED_AUCTIONS,
   UPDATE_AUCTION,
   DELETE_AUCTION,
 } from "../constants/actionTypes";
 
 const initialState = {
   isLoading: false,
-  auctions: [],
+  activeAuctions: [],
+  endedAuctions: [],
   error: null,
 };
 
@@ -33,21 +35,31 @@ const auctionReducer = (state = initialState, action) => {
     case CREATE_AUCTION:
       return {
         ...state,
-        auctions: [payload, ...state.auctions],
+        activeAuctions: [payload, ...state.activeAuctions],
         error: null,
       };
 
-    case GET_MY_AUCTIONS:
+    case GET_MY_ACTIVE_AUCTIONS:
       return {
         ...state,
-        auctions: payload,
+        activeAuctions: payload,
+        error: null,
+      };
+
+    case GET_MY_ENDED_AUCTIONS:
+      return {
+        ...state,
+        endedAuctions: payload,
         error: null,
       };
 
     case UPDATE_AUCTION:
       return {
         ...state,
-        auctions: state.auctions.map((auction) =>
+        activeAuctions: state.activeAuctions.map((auction) =>
+          auction._id === payload._id ? payload : auction
+        ),
+        endedAuctions: state.endedAuctions.map((auction) =>
           auction._id === payload._id ? payload : auction
         ),
         error: null,
@@ -56,7 +68,12 @@ const auctionReducer = (state = initialState, action) => {
     case DELETE_AUCTION:
       return {
         ...state,
-        auctions: state.auctions.filter((auction) => auction._id !== payload),
+        activeAuctions: state.activeAuctions.filter(
+          (auction) => auction._id !== payload
+        ),
+        endedAuctions: state.endedAuctions.filter(
+          (auction) => auction._id !== payload
+        ),
         error: null,
       };
 

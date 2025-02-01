@@ -4,7 +4,9 @@ import {
   CREATE_AUCTION,
   DELETE_AUCTION,
   END_LOADING,
+  GET_MY_ACTIVE_AUCTIONS,
   GET_MY_AUCTIONS,
+  GET_MY_ENDED_AUCTIONS,
   START_LOADING,
   UPDATE_AUCTION,
 } from "@/constants/actionTypes";
@@ -32,6 +34,32 @@ export const getMyAuctions = (userId) => async (dispatch) => {
   } catch (err) {
     console.log(err);
     toast.error(err.response?.data?.error || "Something went wrong");
+    dispatch({ type: END_LOADING });
+  }
+};
+
+export const getMyActiveAuctions = (userId) => async (dispatch) => {
+  try {
+    dispatch({ type: START_LOADING });
+    const { data } = await api.getMyActiveAuctions(userId);
+    dispatch({ type: GET_MY_ACTIVE_AUCTIONS, payload: data });
+    dispatch({ type: END_LOADING });
+  } catch (err) {
+    console.log(err);
+    toast.error(err.response?.data?.error || "Failed to fetch active auctions");
+    dispatch({ type: END_LOADING });
+  }
+};
+
+export const getMyEndedAuctions = (userId) => async (dispatch) => {
+  try {
+    dispatch({ type: START_LOADING });
+    const { data } = await api.getMyEndedAuctions(userId);
+    dispatch({ type: GET_MY_ENDED_AUCTIONS, payload: data });
+    dispatch({ type: END_LOADING });
+  } catch (err) {
+    console.log(err);
+    toast.error(err.response?.data?.error || "Failed to fetch ended auctions");
     dispatch({ type: END_LOADING });
   }
 };

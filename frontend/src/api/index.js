@@ -16,3 +16,7 @@ export const stopAuction = (auctionId) =>
   API.patch(`/api/auctions/${auctionId}/stop`);
 export const deleteAuction = (auctionId) =>
   API.delete(`/api/auctions/${auctionId}/delete`);
+export const getMyActiveAuctions = (userId) =>
+  API.get(`/api/auctions/active/user/${userId}`);
+export const getMyEndedAuctions = (userId) =>
+  API.get(`/api/auctions/ended/user/${userId}`);

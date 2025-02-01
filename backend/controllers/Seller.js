@@ -2,7 +2,7 @@ import Item from "../models/Item.js";
 
 export const createAuction = async (req, res) => {
   const { title, itemPic, startingBid, endDate, admin } = req.body;
-  console.log("enddate", endDate);
+
   const newItem = new Item({
     title,
     itemPic,
@@ -63,5 +63,41 @@ export const deleteAuction = async (req, res) => {
     res.status(200).json(auctionId);
   } catch (error) {
     res.status(500).json({ message: error.message });
+  }
+};
+
+export const getMyActiveAuctions = async (req, res) => {
+  const { userId } = req.params;
+  const currentDate = new Date();
+
+  try {
+    const activeAuctions = await Item.find({
+      admin: userId,
+      endDate: { $gt: currentDate },
+    })
+      .sort({ endDate: 1 })
+      .exec();
+
+    res.status(200).json(activeAuctions);
+  } catch (error) {
+    res.status(404).json({ message: error.message });
+  }
+};
+
+export const getMyEndedAuctions = async (req, res) => {
+  const { userId } = req.params;
+  const currentDate = new Date();
+
+  try {
+    const endedAuctions = await Item.find({
+      admin: userId,
+      endDate: { $lte: currentDate },
+    })
+      .sort({ endDate: -1 })
+      .exec();
+
+    res.status(200).json(endedAuctions);
+  } catch (error) {
+    res.status(404).json({ message: error.message });
   }
 };

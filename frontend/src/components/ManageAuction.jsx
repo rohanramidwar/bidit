@@ -3,7 +3,7 @@ import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
 import { Button } from "./ui/button";
 import { Ellipsis, StopCircle, Trash2 } from "lucide-react";
 import { useDispatch } from "react-redux";
-import { deleteAuction } from "@/actions/sellerActions";
+import { deleteAuction, stopAuction } from "@/actions/sellerActions";
 
 const ManageAuction = ({ auctionId }) => {
   const dispatch = useDispatch();
@@ -11,6 +11,11 @@ const ManageAuction = ({ auctionId }) => {
 
   const handleDeleteAuction = () => {
     dispatch(deleteAuction(auctionId));
+    setIsOpen(false);
+  };
+
+  const handleEndAuction = () => {
+    dispatch(stopAuction(auctionId));
     setIsOpen(false);
   };
 
@@ -33,6 +38,7 @@ const ManageAuction = ({ auctionId }) => {
               <Button
                 className="flex justify-start w-full rounded-none font-normal"
                 variant="ghost"
+                onClick={handleEndAuction}
               >
                 <StopCircle /> End auction
               </Button>
