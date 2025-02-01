@@ -6,3 +6,4 @@ export const LOGOUT = "LOGOUT";
 export const CREATE_AUCTION = "CREATE_AUCTION";
 export const GET_MY_AUCTIONS = "GET_MY_AUCTIONS";
 export const UPDATE_AUCTION = "UPDATE_AUCTION";
+export const DELETE_AUCTION = "DELETE_AUCTION";

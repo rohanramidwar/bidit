@@ -2,9 +2,18 @@ import React, { useState } from "react";
 import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
 import { Button } from "./ui/button";
 import { Ellipsis, StopCircle, Trash2 } from "lucide-react";
+import { useDispatch } from "react-redux";
+import { deleteAuction } from "@/actions/sellerActions";
 
-const ManageAuction = () => {
+const ManageAuction = ({ auctionId }) => {
+  const dispatch = useDispatch();
   const [isOpen, setIsOpen] = useState(false);
+
+  const handleDeleteAuction = () => {
+    dispatch(deleteAuction(auctionId));
+    setIsOpen(false);
+  };
+
   return (
     <div>
       <Popover open={isOpen} onOpenChange={setIsOpen}>
@@ -31,6 +40,7 @@ const ManageAuction = () => {
               <Button
                 className="flex justify-start w-full rounded-none font-normal"
                 variant="ghost"
+                onClick={handleDeleteAuction}
               >
                 <Trash2 /> Delete auction
               </Button>

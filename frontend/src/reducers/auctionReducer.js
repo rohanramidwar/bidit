@@ -4,6 +4,7 @@ import {
   CREATE_AUCTION,
   GET_MY_AUCTIONS,
   UPDATE_AUCTION,
+  DELETE_AUCTION,
 } from "../constants/actionTypes";
 
 const initialState = {
@@ -49,6 +50,13 @@ const auctionReducer = (state = initialState, action) => {
         auctions: state.auctions.map((auction) =>
           auction._id === payload._id ? payload : auction
         ),
+        error: null,
+      };
+
+    case DELETE_AUCTION:
+      return {
+        ...state,
+        auctions: state.auctions.filter((auction) => auction._id !== payload),
         error: null,
       };
 

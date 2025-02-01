@@ -12,5 +12,7 @@ export const createAuction = (formData) =>
   API.post("/api/create-auction", formData);
 export const getMyAuctions = (userId) =>
   API.get(`/api/auctions/user/${userId}`);
-export const stopAuction = (userId) =>
+export const stopAuction = (auctionId) =>
   API.patch(`/api/auctions/${auctionId}/stop`);
+export const deleteAuction = (auctionId) =>
+  API.delete(`/api/auctions/${auctionId}/delete`);

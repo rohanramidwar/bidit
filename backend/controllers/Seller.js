@@ -49,3 +49,19 @@ export const stopAuction = async (req, res) => {
     res.status(409).json({ message: error.message });
   }
 };
+
+export const deleteAuction = async (req, res) => {
+  const { auctionId } = req.params;
+
+  try {
+    const auction = await Item.findById(auctionId);
+    if (!auction) {
+      return res.status(404).json({ message: "Auction not found" });
+    }
+    // Delete the auction
+    await Item.findByIdAndDelete(auctionId);
+    res.status(200).json(auctionId);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};

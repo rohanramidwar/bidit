@@ -16,7 +16,7 @@ const AuctionManageCard = ({ auction }) => {
       <div className="flex items-center justify-between px-2.5 text-teal-900 font-medium">
         <div>{auction?.title}</div>
         <div>
-          <ManageAuction />
+          <ManageAuction auctionId={auction?._id} />
         </div>
       </div>
       <div className="px-2.5 space-y-1">
