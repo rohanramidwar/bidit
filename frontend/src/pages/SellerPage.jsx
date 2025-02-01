@@ -18,7 +18,7 @@ const SellerPage = () => {
     <div className="pt-9 px-4 pb-20 w-full">
       <div className="space-y-4">
         <div className="text-lg font-semibold text-gray-700">Your auctions</div>
-        <div className="flex sm:grid grid-cols-4  gap-4 items-center">
+        <div className="flex flex-col sm:grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 gap-4 items-center">
           {activeAuctions?.map((auction) => (
             <AuctionManageCard key={auction?._id} auction={auction} />
           ))}

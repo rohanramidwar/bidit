@@ -25,19 +25,6 @@ export const createAuction = (formData) => async (dispatch) => {
   }
 };
 
-export const getMyAuctions = (userId) => async (dispatch) => {
-  try {
-    dispatch({ type: START_LOADING });
-    const { data } = await api.getMyAuctions(userId);
-    dispatch({ type: GET_MY_AUCTIONS, payload: data }); //sends to reducer
-    dispatch({ type: END_LOADING });
-  } catch (err) {
-    console.log(err);
-    toast.error(err.response?.data?.error || "Something went wrong");
-    dispatch({ type: END_LOADING });
-  }
-};
-
 export const getMyActiveAuctions = (userId) => async (dispatch) => {
   try {
     dispatch({ type: START_LOADING });
