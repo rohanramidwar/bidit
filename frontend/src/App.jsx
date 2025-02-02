@@ -8,6 +8,7 @@ import { Toaster } from "react-hot-toast";
 import SellerPage from "./pages/SellerPage";
 import { ProtectedRoute } from "./components/ProtectedRoute";
 import { useSelector } from "react-redux";
+import AuctionRoom from "./pages/AuctionRoom";
 
 const App = () => {
   const { user } = useSelector((state) => state.authReducer);
@@ -25,6 +26,15 @@ const App = () => {
           element={
             <ProtectedRoute allowedRoles={["buyer"]}>
               <Home />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/auction/:id"
+          element={
+            <ProtectedRoute allowedRoles={["buyer"]}>
+              <AuctionRoom />
             </ProtectedRoute>
           }
         />

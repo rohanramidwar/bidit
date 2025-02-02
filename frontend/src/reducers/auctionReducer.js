@@ -2,9 +2,10 @@ import {
   START_LOADING,
   END_LOADING,
   CREATE_AUCTION,
-  GET_MY_ACTIVE_AUCTIONS,
-  GET_MY_ENDED_AUCTIONS,
+  GET_ACTIVE_AUCTIONS,
+  GET_ENDED_AUCTIONS,
   END_AUCTION,
+  GET_AUCTION,
   DELETE_AUCTION,
 } from "../constants/actionTypes";
 
@@ -12,6 +13,7 @@ const initialState = {
   isLoading: false,
   activeAuctions: [],
   endedAuctions: [],
+  auction: null,
   error: null,
 };
 
@@ -39,14 +41,21 @@ const auctionReducer = (state = initialState, action) => {
         error: null,
       };
 
-    case GET_MY_ACTIVE_AUCTIONS:
+    case GET_AUCTION:
+      return {
+        ...state,
+        auction: payload,
+        error: null,
+      };
+
+    case GET_ACTIVE_AUCTIONS:
       return {
         ...state,
         activeAuctions: payload,
         error: null,
       };
 
-    case GET_MY_ENDED_AUCTIONS:
+    case GET_ENDED_AUCTIONS:
       return {
         ...state,
         endedAuctions: payload,

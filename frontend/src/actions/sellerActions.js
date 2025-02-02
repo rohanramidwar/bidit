@@ -4,8 +4,8 @@ import {
   CREATE_AUCTION,
   DELETE_AUCTION,
   END_LOADING,
-  GET_MY_ACTIVE_AUCTIONS,
-  GET_MY_ENDED_AUCTIONS,
+  GET_ACTIVE_AUCTIONS,
+  GET_ENDED_AUCTIONS,
   START_LOADING,
   END_AUCTION,
 } from "@/constants/actionTypes";
@@ -28,7 +28,7 @@ export const getMyActiveAuctions = (userId) => async (dispatch) => {
   try {
     dispatch({ type: START_LOADING });
     const { data } = await api.getMyActiveAuctions(userId);
-    dispatch({ type: GET_MY_ACTIVE_AUCTIONS, payload: data });
+    dispatch({ type: GET_ACTIVE_AUCTIONS, payload: data });
     dispatch({ type: END_LOADING });
   } catch (err) {
     console.log(err);
@@ -41,7 +41,7 @@ export const getMyEndedAuctions = (userId) => async (dispatch) => {
   try {
     dispatch({ type: START_LOADING });
     const { data } = await api.getMyEndedAuctions(userId);
-    dispatch({ type: GET_MY_ENDED_AUCTIONS, payload: data });
+    dispatch({ type: GET_ENDED_AUCTIONS, payload: data });
     dispatch({ type: END_LOADING });
   } catch (err) {
     console.log(err);

@@ -18,6 +18,16 @@ const itemSchema = mongoose.Schema(
       type: String,
       required: true,
     },
+    bidders: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User",
+      },
+    ],
+    currentBid: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Bid",
+    },
     admin: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
