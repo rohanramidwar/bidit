@@ -23,7 +23,7 @@ const AuctionManageCard = ({ auction, status }) => {
           src={auction?.itemPic}
           alt="img"
           loading="lazy"
-          className="h-full w-full object-cover"
+          className="h-full w-full object-cover transition-transform hover:scale-[1.02]"
         />
       </div>
       <div className="flex items-center justify-between px-2.5 text-teal-900 font-medium">
