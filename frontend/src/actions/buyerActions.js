@@ -6,6 +6,7 @@ import {
   GET_ENDED_AUCTIONS,
   START_LOADING,
   GET_AUCTION,
+  GET_BIDS,
 } from "@/constants/actionTypes";
 
 export const fetchAuctionById = (id) => async (dispatch) => {
@@ -17,6 +18,19 @@ export const fetchAuctionById = (id) => async (dispatch) => {
   } catch (err) {
     console.log(err);
     toast.error(err.response?.data?.error || "Failed to fetch auction");
+    dispatch({ type: END_LOADING });
+  }
+};
+
+export const fetchBidsByItem = (itemId) => async (dispatch) => {
+  try {
+    dispatch({ type: START_LOADING });
+    const { data } = await api.getBidsByItem(itemId);
+    dispatch({ type: GET_BIDS, payload: data });
+    dispatch({ type: END_LOADING });
+  } catch (err) {
+    console.log(err);
+    toast.error(err.response?.data?.error || "Failed to fetch bids");
     dispatch({ type: END_LOADING });
   }
 };

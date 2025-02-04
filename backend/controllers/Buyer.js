@@ -1,16 +1,32 @@
+import Bid from "../models/Bid.js";
 import Item from "../models/Item.js";
 
 export const getAuctionById = async (req, res) => {
   const { id } = req.params;
 
   try {
-    const auction = await Item.findById(id);
+    const auction = await Item.findById(id).populate("currentBid");
 
     if (!auction) {
       return res.status(404).json({ message: "Auction not found" });
     }
 
     res.status(200).json(auction);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+export const getBidsByItem = async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const bids = await Bid.find({ item: id })
+      .populate("bidder", "name")
+      .sort({ createdAt: -1 })
+      .exec();
+
+    res.status(200).json(bids);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
@@ -80,13 +96,18 @@ export const registerToBid = async (req, res) => {
   }
 };
 
-// Place a bid on an auction
 export const placeBid = async (req, res) => {
   const { id } = req.params;
-  const { userId, bidAmount } = req.body;
+  const { userId, amount } = req.body;
+
+  console.log("amount: ", amount);
+  console.log("userId: ", userId);
+  console.log("id: ", id);
 
   try {
     const auction = await Item.findById(id).populate("currentBid");
+
+    console.log("auction: ", auction);
 
     if (!auction) {
       return res.status(404).json({ message: "Auction not found" });
@@ -95,7 +116,7 @@ export const placeBid = async (req, res) => {
     // Create new bid
     const newBid = new Bid({
       bidder: userId,
-      bid: bidAmount,
+      bid: amount,
       item: id,
     });
 

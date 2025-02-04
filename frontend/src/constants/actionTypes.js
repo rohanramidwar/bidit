@@ -9,3 +9,4 @@ export const DELETE_AUCTION = "DELETE_AUCTION";
 export const GET_ACTIVE_AUCTIONS = "GET_ACTIVE_AUCTIONS";
 export const GET_ENDED_AUCTIONS = "GET_ENDED_AUCTIONS";
 export const GET_AUCTION = "GET_AUCTION";
+export const GET_BIDS = "GET_BIDS";

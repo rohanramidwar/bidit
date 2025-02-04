@@ -25,6 +25,9 @@ export const getActiveAuctions = () => API.get("/api/auctions/active");
 export const getEndedAuctions = () => API.get("/api/auctions/ended");
 
 export const getAuctionById = (id) => API.get(`api/auctions/${id}`);
+export const getBidsByItem = (id) => API.get(`api/auctions/${id}/bids`);
+
 export const registerToBid = (id, userData) =>
   API.post(`api/auctions/${id}/register`, userData);
-export const placeBid = (id) => API.post(`api/auctions/${id}/bid`);
+export const placeBid = (id, userData) =>
+  API.post(`api/auctions/${id}/bid`, userData);
