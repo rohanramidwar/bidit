@@ -5,11 +5,12 @@ import {
   getMyEndedAuctions,
 } from "@/actions/sellerActions";
 import AuctionManageCard from "@/components/AuctionManageCard";
+import { Loader2 } from "lucide-react";
 
 const SellerPage = () => {
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.authReducer);
-  const { activeAuctions, endedAuctions } = useSelector(
+  const { activeAuctions, endedAuctions, isLoading } = useSelector(
     (state) => state.auctionReducer
   );
 
@@ -19,6 +20,12 @@ const SellerPage = () => {
       dispatch(getMyEndedAuctions(user?.id));
     }
   }, [dispatch, user?.id]);
+
+  const Loader = () => (
+    <div className="w-full flex justify-center items-center py-10">
+      <Loader2 className="animate-spin text-teal-500 h-8 w-8" />
+    </div>
+  );
 
   return (
     <div className="pt-9 px-4 pb-20 w-full">
@@ -30,13 +37,17 @@ const SellerPage = () => {
             Active auctions
           </div>
           <div className="flex flex-col sm:grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 gap-4 items-center">
-            {activeAuctions?.map((auction) => (
-              <AuctionManageCard
-                key={auction?._id}
-                auction={auction}
-                status={true}
-              />
-            ))}
+            {isLoading ? (
+              <Loader />
+            ) : (
+              activeAuctions?.map((auction) => (
+                <AuctionManageCard
+                  key={auction?._id}
+                  auction={auction}
+                  status={true}
+                />
+              ))
+            )}
           </div>
         </div>
         <div className="pt-4 space-y-4">
@@ -44,13 +55,17 @@ const SellerPage = () => {
             Past auctions
           </div>
           <div className="flex flex-col sm:grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 gap-4 items-center">
-            {endedAuctions?.map((auction) => (
-              <AuctionManageCard
-                key={auction?._id}
-                auction={auction}
-                status={false}
-              />
-            ))}
+            {isLoading ? (
+              <Loader />
+            ) : (
+              endedAuctions?.map((auction) => (
+                <AuctionManageCard
+                  key={auction?._id}
+                  auction={auction}
+                  status={false}
+                />
+              ))
+            )}
           </div>
         </div>
       </div>

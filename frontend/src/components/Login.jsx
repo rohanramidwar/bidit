@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { z } from "zod";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Loader2 } from "lucide-react";
 import { Label } from "./ui/label";
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
@@ -107,7 +107,7 @@ const Login = () => {
               className="w-full"
               disabled={isLoading}
             >
-              {isLoading ? "Signing in..." : "Sign in"}
+              {isLoading ? <Loader2 className="animate-spin" /> : "Sign in"}
             </Button>
           </div>
           <p className="text-slate-500 text-sm text-center">

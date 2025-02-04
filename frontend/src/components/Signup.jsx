@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { z } from "zod";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Loader2 } from "lucide-react";
 import { Label } from "./ui/label";
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
@@ -134,7 +134,7 @@ const Signup = () => {
               className="w-full"
               disabled={isLoading}
             >
-              {isLoading ? "Signing up..." : "Sign up"}
+              {isLoading ? <Loader2 className="animate-spin" /> : "Sign up"}
             </Button>
           </div>
           <div className="w-full flex items-center justify-between space-x-2">

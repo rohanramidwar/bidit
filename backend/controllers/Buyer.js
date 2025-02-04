@@ -52,11 +52,21 @@ export const registerToBid = async (req, res) => {
   const { id } = req.params;
   const { userId } = req.body;
 
+  if (!userId) {
+    return res.status(400).json({ message: "User ID is required" });
+  }
+
   try {
     const auction = await Item.findById(id);
 
     if (!auction) {
       return res.status(404).json({ message: "Auction not found" });
+    }
+
+    if (auction.bidders.includes(userId)) {
+      return res
+        .status(400)
+        .json({ message: "You are already registered for this auction" });
     }
 
     auction.bidders.push(userId);
