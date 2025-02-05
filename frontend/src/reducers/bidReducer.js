@@ -1,4 +1,9 @@
-import { START_LOADING, END_LOADING, GET_BIDS } from "../constants/actionTypes";
+import {
+  START_LOADING,
+  END_LOADING,
+  GET_BIDS,
+  PLACE_BID,
+} from "../constants/actionTypes";
 
 const initialState = {
   bidsLoading: false,
@@ -29,6 +34,9 @@ const bidsReducer = (state = initialState, action) => {
         bids: payload,
         error: null,
       };
+
+    case PLACE_BID:
+      return { ...state, bids: [payload, ...state.bids], error: null };
 
     case "SET_ERROR":
       return {

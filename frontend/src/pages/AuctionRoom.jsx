@@ -1,5 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { fetchAuctionById, fetchBidsByItem } from "@/actions/buyerActions";
+import {
+  fetchAuctionById,
+  fetchBidsByItem,
+  placeBid,
+  registerToBid,
+} from "@/actions/buyerActions";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import {
@@ -32,23 +37,14 @@ const AuctionRoom = () => {
     dispatch(fetchBidsByItem(id));
   }, [id]);
 
-  const handleRegisterToBid = async () => {
+  const handleRegisterToBid = () => {
     setIsBtnLoading(true);
-    try {
-      const response = await api.registerToBid(id, {
+    dispatch(
+      registerToBid(id, {
         userId: user?.id,
-      });
-
-      if (response.data) {
-        toast.success("Successfully registered for auction!");
-        setIsBtnLoading(false);
-        dispatch(fetchAuctionById(id));
-      }
-    } catch (error) {
-      toast.error("Error registering for auction");
-      console.error("Error registering for auction:", error);
-      setIsBtnLoading(false);
-    }
+      })
+    );
+    setIsBtnLoading(false);
   };
 
   const validateBid = (amount) => {
@@ -66,32 +62,21 @@ const AuctionRoom = () => {
     return "";
   };
 
-  const handlePlaceBid = async () => {
+  const handlePlaceBid = () => {
     const error = validateBid(bidAmount);
     if (error) {
       setValidationError(error);
       return;
     }
-
     setIsBtnLoading(true);
-    try {
-      const response = await api.placeBid(id, {
+    dispatch(
+      placeBid(id, {
         userId: user?.id,
         amount: Number(bidAmount),
-      });
-
-      if (response.data) {
-        toast.success("Bid placed successfully!");
-        setBidAmount("");
-        dispatch(fetchAuctionById(id));
-        dispatch(fetchBidsByItem(id));
-      }
-    } catch (error) {
-      toast.error("Error placing bid");
-      console.error("Error placing bid:", error);
-    } finally {
-      setIsBtnLoading(false);
-    }
+      })
+    );
+    setBidAmount("");
+    setIsBtnLoading(false);
   };
 
   const getSuggestedBids = () => {
@@ -272,7 +257,7 @@ const AuctionRoom = () => {
                             Bidder
                           </th>
                           <th className="pb-2 text-sm font-medium text-gray-400">
-                            Amount
+                            Bid
                           </th>
                           <th className="pb-2 text-sm font-medium text-gray-400">
                             Time

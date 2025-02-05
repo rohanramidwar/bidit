@@ -7,6 +7,7 @@ import {
   END_AUCTION,
   GET_AUCTION,
   DELETE_AUCTION,
+  UPDATE_AUCTION,
 } from "../constants/actionTypes";
 
 const initialState = {
@@ -41,6 +42,7 @@ const auctionReducer = (state = initialState, action) => {
         error: null,
       };
 
+    case UPDATE_AUCTION:
     case GET_AUCTION:
       return {
         ...state,

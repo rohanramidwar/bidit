@@ -122,8 +122,11 @@ export const placeBid = async (req, res) => {
 
     await newBid.save();
 
+    await newBid.populate("bidder", "name");
+
     auction.currentBid = newBid._id;
     await auction.save();
+    await auction.populate("currentBid");
 
     res.status(200).json({
       message: "Bid placed successfully",
