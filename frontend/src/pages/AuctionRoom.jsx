@@ -151,7 +151,7 @@ const AuctionRoom = () => {
                       <div>${auction?.startingBid || 0}</div>
                     </div>
                     <div className="flex items-center justify-between text-sm text-white">
-                      <div>Current bid: </div>
+                      <div>{!isEnded ? "Current bid" : "Highest bid"}</div>
                       <div>${auction?.currentBid?.bid || 0}</div>
                     </div>
                   </div>
