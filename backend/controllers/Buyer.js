@@ -88,9 +88,7 @@ export const registerToBid = async (req, res) => {
     auction.bidders.push(userId);
     await auction.save();
 
-    res
-      .status(200)
-      .json({ message: "Successfully registered for auction", auction });
+    res.status(200).json(auction);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
@@ -106,8 +104,6 @@ export const placeBid = async (req, res) => {
 
   try {
     const auction = await Item.findById(id).populate("currentBid");
-
-    console.log("auction: ", auction);
 
     if (!auction) {
       return res.status(404).json({ message: "Auction not found" });

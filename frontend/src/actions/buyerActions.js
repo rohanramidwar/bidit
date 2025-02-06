@@ -9,6 +9,8 @@ import {
   GET_BIDS,
   UPDATE_AUCTION,
   PLACE_BID,
+  END_BIDS_LOADING,
+  BIDS_LOADING,
 } from "@/constants/actionTypes";
 
 export const fetchAuctionById = (id) => async (dispatch) => {
@@ -53,6 +55,7 @@ export const registerToBid = (id, userData) => async (dispatch) => {
 
 export const placeBid = (id, userData) => async (dispatch) => {
   try {
+    dispatch({ type: BIDS_LOADING });
     const {
       data: { bid, auction },
     } = await api.placeBid(id, userData);
@@ -60,6 +63,7 @@ export const placeBid = (id, userData) => async (dispatch) => {
     dispatch({ type: UPDATE_AUCTION, payload: auction });
 
     toast.success("Bid placed successfulyy");
+    dispatch({ type: END_BIDS_LOADING });
   } catch (err) {
     console.log(err);
     toast.error(err.response?.data?.error || "Failed to place bid");

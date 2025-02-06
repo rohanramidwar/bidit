@@ -9,9 +9,17 @@ import SellerPage from "./pages/SellerPage";
 import { ProtectedRoute } from "./components/ProtectedRoute";
 import { useSelector } from "react-redux";
 import AuctionRoom from "./pages/AuctionRoom";
+import { useAuthPersist } from "./hooks/useAuthPersist";
 
 const App = () => {
   const { user } = useSelector((state) => state.authReducer);
+  const { isLoading, localUser } = useAuthPersist();
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  const currentUser = user || localUser;
 
   return (
     <div className="font-inter text-slate-800 flex flex-col min-h-screen">
@@ -51,8 +59,8 @@ const App = () => {
         <Route
           path="*"
           element={
-            user ? (
-              user.role === "seller" ? (
+            currentUser ? (
+              currentUser.role === "seller" ? (
                 <Navigate to="/dashboard" replace />
               ) : (
                 <Navigate to="/" replace />

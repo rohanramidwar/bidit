@@ -11,4 +11,6 @@ export const GET_ENDED_AUCTIONS = "GET_ENDED_AUCTIONS";
 export const GET_AUCTION = "GET_AUCTION";
 export const GET_BIDS = "GET_BIDS";
 export const UPDATE_AUCTION = "UPDATE_AUCTION";
+export const END_BIDS_LOADING = "END_BIDS_LOADING";
+export const BIDS_LOADING = "BIDS_LOADING";
 export const PLACE_BID = "PLACE_BID";
