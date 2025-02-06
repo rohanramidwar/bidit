@@ -98,10 +98,6 @@ export const placeBid = async (req, res) => {
   const { id } = req.params;
   const { userId, amount } = req.body;
 
-  console.log("amount: ", amount);
-  console.log("userId: ", userId);
-  console.log("id: ", id);
-
   try {
     const auction = await Item.findById(id).populate("currentBid");
 

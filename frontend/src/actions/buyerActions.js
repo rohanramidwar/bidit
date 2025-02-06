@@ -45,7 +45,7 @@ export const registerToBid = (id, userData) => async (dispatch) => {
     const { data } = await api.registerToBid(id, userData);
     dispatch({ type: UPDATE_AUCTION, payload: data });
     dispatch({ type: END_LOADING });
-    toast.success("Successfulyy registered");
+    toast.success("Successfully registered");
   } catch (err) {
     console.log(err);
     toast.error(err.response?.data?.error || "Failed to register");
@@ -62,7 +62,7 @@ export const placeBid = (id, userData) => async (dispatch) => {
     dispatch({ type: PLACE_BID, payload: bid });
     dispatch({ type: UPDATE_AUCTION, payload: auction });
 
-    toast.success("Bid placed successfulyy");
+    toast.success("Bid placed successfully");
     dispatch({ type: END_BIDS_LOADING });
   } catch (err) {
     console.log(err);
