@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { fetchAuctionById, fetchBidsByItem } from "@/actions/buyerActions";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
@@ -8,6 +8,7 @@ import ItemDisplayCard from "@/components/auction_room/ItemDisplayCard";
 import AuctionDetails from "@/components/auction_room/AuctionDetails";
 import RegisterToBidBtn from "@/components/auction_room/RegisterToBidBtn";
 import PlaceBidForm from "@/components/auction_room/PlaceBidForm";
+import { useAuctionSocket } from "@/components/auction_room/useAuctionSocket";
 
 const AuctionRoom = () => {
   const dispatch = useDispatch();
@@ -15,6 +16,26 @@ const AuctionRoom = () => {
   const { bids, bidsLoading } = useSelector((state) => state.bidsReducer);
   const { user } = useSelector((state) => state.authReducer);
   const { id } = useParams();
+  const [participantsCount, setParticipantsCount] = useState(0);
+
+  const { socket } = useAuctionSocket(id, user?.id);
+
+  useEffect(() => {
+    if (!socket) return;
+
+    socket.on("user_joined", ({ participantsCount }) => {
+      setParticipantsCount(participantsCount);
+    });
+
+    socket.on("user_left", ({ participantsCount }) => {
+      setParticipantsCount(participantsCount);
+    });
+
+    return () => {
+      socket.off("user_joined");
+      socket.off("user_left");
+    };
+  }, [socket]);
 
   useEffect(() => {
     dispatch(fetchAuctionById(id));
@@ -36,7 +57,10 @@ const AuctionRoom = () => {
     <div className="pt-9 pb-20 px-4">
       <div className="flex justify-center">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-screen-lg">
-          <ItemDisplayCard auction={auction} />
+          <ItemDisplayCard
+            auction={auction}
+            participantsCount={participantsCount}
+          />
 
           <div className="h-full">
             <div className="p-4 bg-gray-900 rounded-md shadow-md space-y-8">

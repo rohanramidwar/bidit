@@ -7,6 +7,7 @@ import colors from "colors";
 import authRoutes from "./routes/auth.js";
 import sellerRoutes from "./routes/seller.js";
 import buyerRoutes from "./routes/buyer.js";
+import { setupSocket } from "./socket.js";
 
 const app = express();
 //enable us to send post req
@@ -32,4 +33,5 @@ const server = app.listen(PORT, () => {
   console.log(`Server Started on PORT: ${PORT}`);
 });
 
+const io = setupSocket(server);
 connectDatabase();
