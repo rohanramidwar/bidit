@@ -39,6 +39,7 @@ export const getActiveAuctions = async (req, res) => {
     const activeAuctions = await Item.find({
       endDate: { $gt: currentDate },
     })
+      .populate("currentBid")
       .sort({ endDate: 1 })
       .exec();
 
@@ -55,6 +56,7 @@ export const getEndedAuctions = async (req, res) => {
     const endedAuctions = await Item.find({
       endDate: { $lte: currentDate },
     })
+      .populate("currentBid")
       .sort({ endDate: -1 })
       .exec();
 

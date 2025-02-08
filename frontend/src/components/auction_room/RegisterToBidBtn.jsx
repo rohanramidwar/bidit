@@ -2,8 +2,10 @@ import React, { useState } from "react";
 import { Button } from "../ui/button";
 import { Loader2, ShieldCheck } from "lucide-react";
 import { registerToBid } from "@/actions/buyerActions";
+import { useDispatch } from "react-redux";
 
 const RegisterToBidBtn = ({ id, userId }) => {
+  const dispatch = useDispatch();
   const [isBtnLoading, setIsBtnLoading] = useState(false);
 
   const handleRegisterToBid = () => {

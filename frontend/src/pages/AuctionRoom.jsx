@@ -21,6 +21,11 @@ const AuctionRoom = () => {
   const { socket } = useAuctionSocket(id, user?.id);
 
   useEffect(() => {
+    dispatch(fetchAuctionById(id));
+    dispatch(fetchBidsByItem(id));
+  }, [id]);
+
+  useEffect(() => {
     if (!socket) return;
 
     socket.on("user_joined", ({ participantsCount }) => {
@@ -36,11 +41,6 @@ const AuctionRoom = () => {
       socket.off("user_left");
     };
   }, [socket]);
-
-  useEffect(() => {
-    dispatch(fetchAuctionById(id));
-    dispatch(fetchBidsByItem(id));
-  }, [id]);
 
   const isRegistered = auction?.bidders?.includes(user?.id);
   const isEnded = new Date(auction?.endDate) <= new Date();
@@ -78,7 +78,12 @@ const AuctionRoom = () => {
                   />
 
                   {isRegistered && !isEnded && (
-                    <PlaceBidForm auction={auction} id={id} userId={user?.id} />
+                    <PlaceBidForm
+                      auction={auction}
+                      id={id}
+                      userId={user?.id}
+                      socket={socket}
+                    />
                   )}
 
                   {!isRegistered && !isEnded && (

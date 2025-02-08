@@ -35,6 +35,10 @@ export const setupSocket = (server) => {
       }
     });
 
+    socket.on("new_bid", ({ bid, auction }) => {
+      io.to(auction?._id).emit("bid_update", { bid, auction });
+    });
+
     socket.on("disconnect", () => {
       roomParticipants.forEach((participants, auctionId) => {
         if (participants.has(socket.userId)) {

@@ -53,14 +53,21 @@ export const registerToBid = (id, userData) => async (dispatch) => {
   }
 };
 
-export const placeBid = (id, userData) => async (dispatch) => {
+export const placeBid = (id, userData, socket) => async (dispatch) => {
   try {
     dispatch({ type: BIDS_LOADING });
     const {
       data: { bid, auction },
     } = await api.placeBid(id, userData);
-    dispatch({ type: PLACE_BID, payload: bid });
-    dispatch({ type: UPDATE_AUCTION, payload: auction });
+
+    socket?.emit("new_bid", {
+      bid,
+      auction,
+    });
+
+    // dispatch({ type: PLACE_BID, payload: bid });
+
+    // dispatch({ type: UPDATE_AUCTION, payload: auction });
 
     toast.success("Bid placed successfully");
     dispatch({ type: END_BIDS_LOADING });
