@@ -12,15 +12,13 @@ import {
 
 export const createAuction = (formData) => async (dispatch) => {
   try {
-    dispatch({ type: START_LOADING });
     const { data } = await api.createAuction(formData);
     dispatch({ type: CREATE_AUCTION, payload: data }); //sends to reducer
-    dispatch({ type: END_LOADING });
+
     toast.success("Auction created successfully!");
   } catch (err) {
     console.log(err);
     toast.error(err.response?.data?.error || "Something went wrong");
-    dispatch({ type: END_LOADING });
   }
 };
 
@@ -52,27 +50,22 @@ export const getMyEndedAuctions = (userId) => async (dispatch) => {
 
 export const stopAuction = (auctionId) => async (dispatch) => {
   try {
-    dispatch({ type: START_LOADING });
     const { data } = await api.stopAuction(auctionId);
     dispatch({ type: END_AUCTION, payload: data }); //sends to reducer
-    dispatch({ type: END_LOADING });
   } catch (err) {
     console.log(err);
     toast.error(err.response?.data?.error || "Something went wrong");
-    dispatch({ type: END_LOADING });
   }
 };
 
 export const deleteAuction = (auctionId) => async (dispatch) => {
   try {
-    dispatch({ type: START_LOADING });
     await api.deleteAuction(auctionId);
     dispatch({ type: DELETE_AUCTION, payload: auctionId });
-    dispatch({ type: END_LOADING });
+
     toast.success("Auction deleted successfully!");
   } catch (err) {
     console.log(err);
     toast.error(err.response?.data?.message || "Something went wrong");
-    dispatch({ type: END_LOADING });
   }
 };

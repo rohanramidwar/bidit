@@ -38,7 +38,7 @@ const bidsReducer = (state = initialState, action) => {
       };
 
     case PLACE_BID:
-      return { ...state, bids: [payload, ...state.bids], error: null };
+      return { ...state, bids: [payload, ...state?.bids], error: null };
 
     case "SET_ERROR":
       return {

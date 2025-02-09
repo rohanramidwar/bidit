@@ -45,14 +45,13 @@ const BidHistory = ({ bids, bidsLoading }) => {
                 flex items-center justify-between p-3 rounded-lg 
                 ${
                   index === 0
-                    ? "bg-teal-900/30 border-l-4 border-teal-500"
+                    ? "bg-teal-900/30 border-teal-500"
                     : "bg-gray-900/50"
                 }
                 transition-all duration-300 hover:bg-gray-700/50
               `}
             >
               <div className="flex items-center space-x-3">
-                {index === 0 && <Trophy className="text-teal-500" size={20} />}
                 <div>
                   <div className="text-sm font-medium text-white">
                     {bid.bidder.name}

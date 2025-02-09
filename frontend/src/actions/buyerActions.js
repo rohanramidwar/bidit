@@ -12,6 +12,7 @@ import {
   END_BIDS_LOADING,
   BIDS_LOADING,
 } from "@/constants/actionTypes";
+import { data } from "react-router-dom";
 
 export const fetchAuctionById = (id) => async (dispatch) => {
   try {
@@ -41,21 +42,19 @@ export const fetchBidsByItem = (itemId) => async (dispatch) => {
 
 export const registerToBid = (id, userData) => async (dispatch) => {
   try {
-    dispatch({ type: START_LOADING });
     const { data } = await api.registerToBid(id, userData);
     dispatch({ type: UPDATE_AUCTION, payload: data });
-    dispatch({ type: END_LOADING });
+
     toast.success("Successfully registered");
+    return data;
   } catch (err) {
     console.log(err);
     toast.error(err.response?.data?.error || "Failed to register");
-    dispatch({ type: END_LOADING });
   }
 };
 
 export const placeBid = (id, userData, socket) => async (dispatch) => {
   try {
-    dispatch({ type: BIDS_LOADING });
     const {
       data: { bid, auction },
     } = await api.placeBid(id, userData);
@@ -65,12 +64,8 @@ export const placeBid = (id, userData, socket) => async (dispatch) => {
       auction,
     });
 
-    // dispatch({ type: PLACE_BID, payload: bid });
-
-    // dispatch({ type: UPDATE_AUCTION, payload: auction });
-
     toast.success("Bid placed successfully");
-    dispatch({ type: END_BIDS_LOADING });
+    return data;
   } catch (err) {
     console.log(err);
     toast.error(err.response?.data?.error || "Failed to place bid");

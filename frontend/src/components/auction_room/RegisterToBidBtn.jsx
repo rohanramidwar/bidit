@@ -8,14 +8,15 @@ const RegisterToBidBtn = ({ id, userId }) => {
   const dispatch = useDispatch();
   const [isBtnLoading, setIsBtnLoading] = useState(false);
 
-  const handleRegisterToBid = () => {
-    setIsBtnLoading(true);
-    dispatch(
-      registerToBid(id, {
-        userId,
-      })
-    );
-    setIsBtnLoading(false);
+  const handleRegisterToBid = async () => {
+    try {
+      setIsBtnLoading(true);
+      await dispatch(registerToBid(id, { userId }));
+    } catch (error) {
+      console.error("Error in handleRegisterToBid:", error);
+    } finally {
+      setIsBtnLoading(false);
+    }
   };
 
   return (

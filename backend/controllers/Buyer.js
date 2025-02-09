@@ -75,7 +75,7 @@ export const registerToBid = async (req, res) => {
   }
 
   try {
-    const auction = await Item.findById(id);
+    const auction = await Item.findById(id).populate("currentBid");
 
     if (!auction) {
       return res.status(404).json({ message: "Auction not found" });

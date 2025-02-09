@@ -27,25 +27,30 @@ const PlaceBidForm = ({ auction, id, userId, socket }) => {
     return "";
   };
 
-  const handlePlaceBid = () => {
+  const handlePlaceBid = async () => {
     const error = validateBid(bidAmount);
     if (error) {
       setValidationError(error);
       return;
     }
     setIsBtnLoading(true);
-    dispatch(
-      placeBid(
-        id,
-        {
-          userId,
-          amount: Number(bidAmount),
-        },
-        socket
-      )
-    );
-    setBidAmount("");
-    setIsBtnLoading(false);
+    try {
+      await dispatch(
+        placeBid(
+          id,
+          {
+            userId,
+            amount: Number(bidAmount),
+          },
+          socket
+        )
+      );
+      setBidAmount("");
+    } catch (err) {
+      console.error("Error placing bid:", err);
+    } finally {
+      setIsBtnLoading(false);
+    }
   };
 
   return (

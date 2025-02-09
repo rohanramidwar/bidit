@@ -1,16 +1,14 @@
 import { Loader2 } from "lucide-react";
 import React from "react";
 
-const ItemDisplayCard = ({ auction, participantsCount }) => {
+const ItemDisplayCard = ({ auction }) => {
   return (
     <div className="md:sticky md:top-4 h-fit">
       <div className="p-4 rounded-md bg-gray-900 space-y-4 shadow-md">
-        <div className="flex justify-between items-center">
-          <div className="text-3xl font-medium text-teal-700">
-            {auction?.title}
-          </div>
-          <div className="text-teal-700">Active users: {participantsCount}</div>
+        <div className="text-3xl font-medium text-teal-700">
+          {auction?.title}
         </div>
+
         {auction?.itemPic ? (
           <img
             className="rounded-md w-full"
