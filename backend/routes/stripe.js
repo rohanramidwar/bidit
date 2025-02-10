@@ -31,7 +31,7 @@ router.post("/create-checkout-session", async (req, res) => {
           id: id,
         },
       },
-      unit_amount: amount * 100,
+      unit_amount: price * 100,
     },
     quantity: 1,
   };
