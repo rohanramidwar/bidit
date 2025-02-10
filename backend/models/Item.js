@@ -33,7 +33,7 @@ const itemSchema = mongoose.Schema(
       ref: "User",
     },
     paymentStatus: {
-      typeo: Boolean,
+      type: Boolean,
       default: false,
     },
   },
