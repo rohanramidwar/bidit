@@ -3,7 +3,8 @@ import axios from "axios"; //used to make api calls
 axios.defaults.withCredentials = true;
 
 const API = axios.create({
-  baseURL: "http://localhost:5000",
+  // baseURL: "http://localhost:5000",
+  baseURL: "https://bidit-jsro.vercel.app",
 }); //points to backend routes
 
 export const signup = (formData) => API.post("/user/register", formData);

@@ -34,5 +34,9 @@ const server = app.listen(PORT, () => {
   console.log(`Server Started on PORT: ${PORT}`);
 });
 
+app.get("/", (req, res) => {
+  res.send("API is running...");
+});
+
 const io = setupSocket(server);
 connectDatabase();
