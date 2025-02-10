@@ -12,6 +12,13 @@ import { setupSocket } from "./socket.js";
 
 const app = express();
 //enable us to send post req
+app.use(
+  bodyParser.json({
+    verify: function (req, res, buf) {
+      req.rawBody = buf;
+    },
+  })
+);
 app.use(bodyParser.json({ limit: "30mb", extended: true }));
 app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
 app.use(
@@ -22,11 +29,13 @@ app.use(
     credentials: true,
   })
 );
+
+app.use("/api/stripe", stripeRoutes);
+
 app.use(express.json());
 
 app.use("/user", authRoutes);
 app.use("/api", sellerRoutes, buyerRoutes);
-app.use("/api/stripe", stripeRoutes);
 
 config(); //access to env
 
