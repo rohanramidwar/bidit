@@ -10,7 +10,6 @@ import RegisterToBidBtn from "@/components/auction_room/RegisterToBidBtn";
 import PlaceBidForm from "@/components/auction_room/PlaceBidForm";
 import { useAuctionSocket } from "@/components/auction_room/useAuctionSocket";
 import { Button } from "@/components/ui/button";
-import AddToCartBtn from "@/components/auction_room/AddToCartBtn";
 
 const AuctionRoom = () => {
   const dispatch = useDispatch();
@@ -92,7 +91,10 @@ const AuctionRoom = () => {
                   )}
 
                   {isWinner && isEnded && (
-                    <AddToCartBtn id={id} userId={user?.id} />
+                    <Button className="w-full" variant="teal">
+                      <ShieldCheck className="mb-px" />
+                      Pay ${auction?.currentBid?.bid}
+                    </Button>
                   )}
                 </>
               )}

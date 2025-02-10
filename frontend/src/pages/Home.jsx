@@ -25,8 +25,6 @@ const Home = () => {
   return (
     <div className="pt-9 px-4 pb-20 w-full">
       <div className="space-y-4">
-        {/* <div className="text-lg font-semibold text-gray-700">Your auctions</div> */}
-
         <div className="space-y-4">
           <div className="text-lg font-semibold text-teal-700">
             Active auctions
