@@ -14,3 +14,6 @@ export const UPDATE_AUCTION = "UPDATE_AUCTION";
 export const END_BIDS_LOADING = "END_BIDS_LOADING";
 export const BIDS_LOADING = "BIDS_LOADING";
 export const PLACE_BID = "PLACE_BID";
+export const ADD_TO_CART = "ADD_TO_CART";
+export const REMOVE_FROM_CART = "REMOVE_FROM_CART";
+export const GET_CART_ITEMS = "GET_CART_ITEMS";

@@ -8,6 +8,7 @@ import authRoutes from "./routes/auth.js";
 import sellerRoutes from "./routes/seller.js";
 import buyerRoutes from "./routes/buyer.js";
 import { setupSocket } from "./socket.js";
+import cartRoutes from "./routes/cart.js";
 
 const app = express();
 //enable us to send post req
@@ -24,6 +25,7 @@ app.use(express.json());
 
 app.use("/user", authRoutes);
 app.use("/api", sellerRoutes, buyerRoutes);
+app.use("/cart", cartRoutes);
 
 config(); //access to env
 

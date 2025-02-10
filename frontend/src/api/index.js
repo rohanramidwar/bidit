@@ -31,3 +31,9 @@ export const registerToBid = (id, userData) =>
   API.post(`api/auctions/${id}/register`, userData);
 export const placeBid = (id, userData) =>
   API.post(`api/auctions/${id}/bid`, userData);
+
+export const addToCart = (itemId, userId) =>
+  API.post(`/cart/add/${itemId}`, { userId });
+export const removeFromCart = (itemId, userId) =>
+  API.delete(`/cart/${itemId}/user/${userId}`);
+export const getCartItems = (userId) => API.get(`/cart/${userId}`);
