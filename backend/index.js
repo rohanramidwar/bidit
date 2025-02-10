@@ -7,6 +7,7 @@ import colors from "colors";
 import authRoutes from "./routes/auth.js";
 import sellerRoutes from "./routes/seller.js";
 import buyerRoutes from "./routes/buyer.js";
+import stripeRoutes from "./routes/stripe.js";
 import { setupSocket } from "./socket.js";
 
 const app = express();
@@ -25,6 +26,7 @@ app.use(express.json());
 
 app.use("/user", authRoutes);
 app.use("/api", sellerRoutes, buyerRoutes);
+app.use("/api/stripe", stripeRoutes);
 
 config(); //access to env
 
