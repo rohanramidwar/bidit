@@ -32,6 +32,10 @@ const itemSchema = mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
     },
+    paymentStatus: {
+      typeo: Boolean,
+      default: false,
+    },
   },
   { timestamps: true }
 );
