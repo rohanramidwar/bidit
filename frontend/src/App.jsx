@@ -10,6 +10,7 @@ import { ProtectedRoute } from "./components/ProtectedRoute";
 import { useSelector } from "react-redux";
 import AuctionRoom from "./pages/AuctionRoom";
 import { useAuthPersist } from "./hooks/useAuthPersist";
+import MyOrdersPage from "./pages/MyOrdersPage";
 
 const App = () => {
   const { user } = useSelector((state) => state.authReducer);
@@ -43,6 +44,15 @@ const App = () => {
           element={
             <ProtectedRoute allowedRoles={["buyer"]}>
               <AuctionRoom />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/orders/:id"
+          element={
+            <ProtectedRoute allowedRoles={["buyer"]}>
+              <MyOrdersPage />
             </ProtectedRoute>
           }
         />

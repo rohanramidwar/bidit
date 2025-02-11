@@ -32,3 +32,5 @@ export const registerToBid = (id, userData) =>
   API.post(`api/auctions/${id}/register`, userData);
 export const placeBid = (id, userData) =>
   API.post(`api/auctions/${id}/bid`, userData);
+
+export const fetchUserOrders = (id) => API.get(`/api/orders/${id}`);

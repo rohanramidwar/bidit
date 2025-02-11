@@ -9,8 +9,7 @@ import {
   GET_BIDS,
   UPDATE_AUCTION,
   PLACE_BID,
-  END_BIDS_LOADING,
-  BIDS_LOADING,
+  GET_ORDERS,
 } from "@/constants/actionTypes";
 import { data } from "react-router-dom";
 
@@ -40,6 +39,16 @@ export const fetchBidsByItem = (itemId) => async (dispatch) => {
   }
 };
 
+export const fetchUserOrders = (id) => async (dispatch) => {
+  try {
+    const { data } = await api.fetchUserOrders(id);
+    dispatch({ type: GET_ORDERS, payload: data });
+  } catch (err) {
+    console.log(err);
+    toast.error(err.response?.data?.error || "Failed to fetch orders");
+  }
+};
+
 export const registerToBid = (id, userData) => async (dispatch) => {
   try {
     const { data } = await api.registerToBid(id, userData);
@@ -63,6 +72,10 @@ export const placeBid = (id, userData, socket) => async (dispatch) => {
       bid,
       auction,
     });
+
+    //remove when you run locally
+    dispatch({ type: PLACE_BID, payload: bid });
+    dispatch({ type: UPDATE_AUCTION, payload: auction });
 
     toast.success("Bid placed successfully");
     return data;

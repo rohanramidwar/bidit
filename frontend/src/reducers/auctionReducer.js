@@ -8,12 +8,14 @@ import {
   GET_AUCTION,
   DELETE_AUCTION,
   UPDATE_AUCTION,
+  GET_ORDERS,
 } from "../constants/actionTypes";
 
 const initialState = {
   isLoading: false,
   activeAuctions: [],
   endedAuctions: [],
+  orders: [],
   auction: null,
   error: null,
 };
@@ -61,6 +63,13 @@ const auctionReducer = (state = initialState, action) => {
       return {
         ...state,
         endedAuctions: payload,
+        error: null,
+      };
+
+    case GET_ORDERS:
+      return {
+        ...state,
+        orders: payload,
         error: null,
       };
 

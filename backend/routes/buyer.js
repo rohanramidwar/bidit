@@ -17,6 +17,6 @@ router.get("/auctions/:id", getAuctionById);
 router.post("/auctions/:id/register", registerToBid);
 router.post("/auctions/:id/bid", placeBid);
 router.get("/auctions/:id/bids", getBidsByItem);
-router.get("/orders/:userId", fetchOrders);
+router.get("/orders/:id", fetchOrders);
 
 export default router;
