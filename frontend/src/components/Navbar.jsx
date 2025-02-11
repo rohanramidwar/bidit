@@ -40,7 +40,7 @@ const Navbar = () => {
             <Button size="sm" variant="teal">
               <Link
                 to={`/orders/${user?.id}`}
-                className="flex items-center space-x-1"
+                className="flex items-center gap-2"
               >
                 <Package className="mb-px" /> Track Orders
               </Link>
