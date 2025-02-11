@@ -40,7 +40,7 @@ const SellerPage = () => {
             {isLoading ? (
               <Loader />
             ) : activeAuctions.length === 0 ? (
-              <div className="text-white">No Active Auctions Found</div>
+              <div>No active auctions found</div>
             ) : (
               activeAuctions?.map((auction) => (
                 <AuctionManageCard
@@ -60,7 +60,7 @@ const SellerPage = () => {
             {isLoading ? (
               <Loader />
             ) : endedAuctions.length === 0 ? (
-              <div className="text-white">No Past Auctions Found</div>
+              <div>No past auctions found</div>
             ) : (
               endedAuctions?.map((auction) => (
                 <AuctionManageCard
