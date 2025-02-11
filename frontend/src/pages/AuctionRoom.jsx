@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { fetchAuctionById, fetchBidsByItem } from "@/actions/buyerActions";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
-import { Loader2, ShieldCheck } from "lucide-react";
+import { Loader2, Package, ShieldCheck } from "lucide-react";
 import BidHistory from "@/components/BidHistory";
 import ItemDisplayCard from "@/components/auction_room/ItemDisplayCard";
 import AuctionDetails from "@/components/auction_room/AuctionDetails";
@@ -95,9 +95,14 @@ const AuctionRoom = () => {
                     <BuyBtn id={id} userId={user?.id} auction={auction} />
                   )}
 
-                  {isWinner && isEnded && !auction?.redeem && (
+                  {isWinner && isEnded && auction?.redeem && (
                     <Button className="w-full" variant="teal">
-                      <Link to={`/orders/${user?.id}`}>Track order status</Link>
+                      <Link
+                        to={`/orders/${user?.id}`}
+                        className="flex items-center gap-2"
+                      >
+                        <Package className="mb-px" /> Track Order
+                      </Link>
                     </Button>
                   )}
                 </>
