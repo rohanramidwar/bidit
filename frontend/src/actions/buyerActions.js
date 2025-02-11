@@ -41,11 +41,14 @@ export const fetchBidsByItem = (itemId) => async (dispatch) => {
 
 export const fetchUserOrders = (id) => async (dispatch) => {
   try {
+    dispatch({ type: START_LOADING });
     const { data } = await api.fetchUserOrders(id);
     dispatch({ type: GET_ORDERS, payload: data });
+    dispatch({ type: END_LOADING });
   } catch (err) {
     console.log(err);
     toast.error(err.response?.data?.error || "Failed to fetch orders");
+    dispatch({ type: END_LOADING });
   }
 };
 
