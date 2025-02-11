@@ -39,6 +39,8 @@ const SellerPage = () => {
           <div className="flex flex-col sm:grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 gap-4 items-center">
             {isLoading ? (
               <Loader />
+            ) : activeAuctions.length === 0 ? (
+              <div className="text-lg text-white">No Active Auctions Found</div>
             ) : (
               activeAuctions?.map((auction) => (
                 <AuctionManageCard
@@ -57,6 +59,8 @@ const SellerPage = () => {
           <div className="flex flex-col sm:grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 gap-4 items-center">
             {isLoading ? (
               <Loader />
+            ) : endedAuctions.length === 0 ? (
+              <div className="text-lg text-white">No Past Auctions Found</div>
             ) : (
               endedAuctions?.map((auction) => (
                 <AuctionManageCard
