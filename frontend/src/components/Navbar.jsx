@@ -5,7 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import CreateAuction from "./CreateAuction";
 import { logOut } from "@/actions/authActions";
-import { UserCircle } from "lucide-react";
+import { Package, UserCircle } from "lucide-react";
 import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
 
 const Navbar = () => {
@@ -35,31 +35,47 @@ const Navbar = () => {
         )}
       </div>
       {user ? (
-        <Popover open={isOpen} onOpenChange={setIsOpen}>
-          <PopoverTrigger asChild>
-            <div
-              role="button"
-              className="flex flex-col gap-px items-center text-white"
-            >
-              <UserCircle />
-              <p className="text-sm font-normal lowercase">
-                {user?.name?.split(" ")[0]}
-              </p>
-            </div>
-          </PopoverTrigger>
-          <PopoverContent align="end" className="w-30">
-            <div className="grid gap-4">
-              <div>
-                <h4 className="text-center text-sm font-medium text-teal-900">
-                  Profile
-                </h4>
+        <div className="flex items-center gap-4">
+          {user && user?.role === "buyer" && (
+            <Button size="sm" variant="teal">
+              <Link
+                to={`/orders/${user?.id}`}
+                className="flex items-center space-x-1"
+              >
+                <Package className="mb-px" /> Track Orders
+              </Link>
+            </Button>
+          )}
+          <Popover open={isOpen} onOpenChange={setIsOpen}>
+            <PopoverTrigger asChild>
+              <div
+                role="button"
+                className="flex flex-col gap-px items-center text-white"
+              >
+                <UserCircle />
+                <p className="text-sm font-normal lowercase">
+                  {user?.name?.split(" ")[0]}
+                </p>
               </div>
-              <Button variant={"destructive"} size="sm" onClick={handleLogOut}>
-                Log out
-              </Button>
-            </div>
-          </PopoverContent>
-        </Popover>
+            </PopoverTrigger>
+            <PopoverContent align="end" className="w-30">
+              <div className="grid gap-4">
+                <div>
+                  <h4 className="text-center text-sm font-medium text-teal-900">
+                    Profile
+                  </h4>
+                </div>
+                <Button
+                  variant={"destructive"}
+                  size="sm"
+                  onClick={handleLogOut}
+                >
+                  Log out
+                </Button>
+              </div>
+            </PopoverContent>
+          </Popover>
+        </div>
       ) : (
         <div className="flex space-x-2 items-center">
           <Button size="sm" variant={"teal"}>

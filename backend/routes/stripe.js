@@ -68,7 +68,7 @@ router.post("/create-checkout-session", async (req, res) => {
     mode: "payment",
     customer: customer.id,
     success_url: `https://bidit-blue.vercel.app/orders/${userId}`,
-    cancel_url: `https://bidit-blue.vercel.app/${id}`,
+    cancel_url: `https://bidit-blue.vercel.app/auction/${id}`,
   });
 
   res.json({ id: session.id });
