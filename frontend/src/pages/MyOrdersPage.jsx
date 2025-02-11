@@ -47,7 +47,7 @@ const MyOrdersPage = () => {
           {isLoading ? (
             <Loader />
           ) : orders.length === 0 ? (
-            <div>You haven't placed any orders yet.</div>
+            <div>No Orders Found</div>
           ) : (
             orders.map((order) => (
               <Card key={order?._id} className="w-full bg-gray-900">
