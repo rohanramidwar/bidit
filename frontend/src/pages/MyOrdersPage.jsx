@@ -1,6 +1,5 @@
 import { fetchUserOrders } from "@/actions/buyerActions";
-import Card from "@/components/Card";
-import { CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Package, Truck } from "lucide-react";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -51,7 +50,7 @@ const MyOrdersPage = () => {
                   <div className="w-24 h-24">
                     <img
                       src="/api/placeholder/96/96"
-                      alt={order?.title}
+                      alt={order?.itemPic}
                       className="w-full h-full object-cover rounded border border-gray-700"
                     />
                   </div>
