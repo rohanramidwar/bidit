@@ -40,7 +40,7 @@ const MyOrdersPage = () => {
   };
 
   return (
-    <div className="pt-9 px-4 pb-20 w-full flex justify-center">
+    <div className="pt-9 px-4 pb-20 w-full md:flex md:justify-start">
       <div className="space-y-4">
         <h1 className="text-lg font-semibold text-teal-700">My Orders</h1>
         <div className="grid grid-cols-1 gap-4">
