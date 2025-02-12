@@ -47,7 +47,7 @@ const AuctionManageCard = ({ auction, status }) => {
         </div>
         <div className="flex items-center justify-between text-sm text-teal-900">
           <div>{status ? "Current bid:" : "Highest bid:"} </div>
-          <div>${auction?.currentBid?.bid}</div>
+          <div>${auction?.currentBid?.bid || 0}</div>
         </div>
       </div>
     </div>
