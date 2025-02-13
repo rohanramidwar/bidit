@@ -63,7 +63,7 @@ export const getMyActiveAuctions = async (req, res) => {
     const activeAuctions = await Item.find({
       admin: userId,
       endDate: { $gt: currentDate },
-    })
+    }).populate("currentBid")
       .sort({ endDate: 1 })
       .exec();
 
@@ -81,8 +81,8 @@ export const getMyEndedAuctions = async (req, res) => {
     const endedAuctions = await Item.find({
       admin: userId,
       endDate: { $lte: currentDate },
-    })
-      .sort({ endDate: -1 })
+    }).populate("currentBid")
+      .sort({ endDate: 1 })
       .exec();
 
     res.status(200).json(endedAuctions);
